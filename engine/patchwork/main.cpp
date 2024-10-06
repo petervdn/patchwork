@@ -1,14 +1,16 @@
-//
-//  main.cpp
-//  patchwork
-//
-//  Created by Peter van der Noord on 29/09/2024.
-//
+#include <emscripten.h>
 
-#include <iostream>
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
-    return 0;
+EM_JS(void, call_alert, (), {
+  alert('hello world!');
+  
+});
+
+
+extern "C" {
+EMSCRIPTEN_KEEPALIVE
+    float myFunction (float num) {
+        
+        return num * 2;
+    }
 }
