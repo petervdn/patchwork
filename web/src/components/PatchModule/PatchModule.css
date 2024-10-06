@@ -1,0 +1,17 @@
+.module {
+    background-color: white;
+    width: 200px;
+    height: 100px;
+    position: absolute;
+    touch-action: none;
+    border-radius: 6px;
+}
+
+.module h2 {
+    padding: 5px 10px;
+    margin: 0;
+    border-radius: 6px 6px 0 0;
+    background-color: var(--bamboo);
+    color: var(--dark);
+    font-size: 20px;
+}

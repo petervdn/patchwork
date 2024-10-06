@@ -1,7 +1,8 @@
+import './PatchModule.css';
 import { useGesture } from '@use-gesture/react';
 import { useRef, useState } from 'react';
-import { useModule, usePatchStore } from '../utils/patchStore.ts';
-import { Position } from '../utils/types.ts';
+import { useModule, usePatchStore } from '../../utils/patchStore.ts';
+import { Position } from '../../utils/types.ts';
 
 type Props = {
   moduleId: string;
@@ -42,12 +43,8 @@ export function PatchModule({ moduleId }: Props) {
   return (
     <div
       ref={elementRef}
+      className="module"
       style={{
-        touchAction: 'none',
-        backgroundColor: 'white',
-        width: 200,
-        height: 100,
-        position: 'absolute',
         left: module.position.x + dragOffset.x,
         top: module.position.y + dragOffset.y,
       }}

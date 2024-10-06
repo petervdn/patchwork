@@ -1,5 +1,5 @@
-import { Patch } from '../utils/types.ts';
-import { PatchModule } from './PatchModule.tsx';
+import { Patch } from '../../utils/types.ts';
+import { PatchModule } from '../PatchModule/PatchModule.tsx';
 
 type Props = {
   modules: Patch['modules'];
