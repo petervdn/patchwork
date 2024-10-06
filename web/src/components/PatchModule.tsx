@@ -1,34 +1,58 @@
-import { Module } from '../utils/types.ts';
 import { useGesture } from '@use-gesture/react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import { useModule, usePatchStore } from '../utils/patchStore.ts';
+import { Position } from '../utils/types.ts';
 
 type Props = {
-  module: Module;
+  moduleId: string;
 };
 
-export function PatchModule({ module }: Props) {
+export function PatchModule({ moduleId }: Props) {
+  const module = useModule(moduleId);
+  const updateModule = usePatchStore((state) => state.updateModule);
+
+  const [dragOffset, setDragOffset] = useState<Position>({ x: 0, y: 0 });
+
   const elementRef = useRef<HTMLDivElement>(null);
   useGesture(
     {
       onDrag: (state) => {
-        console.log(state);
+        if (!module) {
+          return;
+        }
+        setDragOffset({ x: state.movement[0], y: state.movement[1] });
+        if (state.last) {
+          setDragOffset({ x: 0, y: 0 });
+          updateModule(moduleId, {
+            position: {
+              x: module.position.x + dragOffset.x,
+              y: module.position.y + dragOffset.y,
+            },
+          });
+        }
       },
     },
     { target: elementRef, eventOptions: { passive: false, capture: false } },
   );
 
+  if (!module) {
+    return null;
+  }
+
   return (
     <div
+      ref={elementRef}
       style={{
+        touchAction: 'none',
         backgroundColor: 'white',
         width: 200,
         height: 100,
         position: 'absolute',
-        left: module.position.x,
-        top: module.position.y,
+        left: module.position.x + dragOffset.x,
+        top: module.position.y + dragOffset.y,
       }}
     >
-      <h2 ref={elementRef}>Module</h2>
+      <h2>Module {moduleId}</h2>
       <div>Content</div>
     </div>
   );

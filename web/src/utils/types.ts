@@ -5,7 +5,7 @@ type Entity = {
 type Input = Entity;
 type Output = Entity;
 
-type Position = {
+export type Position = {
   x: number;
   y: number;
 };

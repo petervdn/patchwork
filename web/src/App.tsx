@@ -1,29 +1,33 @@
 import './App.css';
 import { PatchCanvas } from './components/PatchCanvas.tsx';
+import { usePatchStore } from './utils/patchStore.ts';
 import { Patch } from './utils/types.ts';
+import { useEffect } from 'react';
 
-function getRandomPosition() {
+function createPatch(): Patch {
   return {
-    x: Math.random() * 800,
-    y: Math.random() * 800,
+    modules: [
+      { id: '1', type: 'lfo', position: { x: 200, y: 200 } },
+      { id: '2', type: 'lfo', position: { x: 600, y: 200 } },
+      { id: '3', type: 'lfo', position: { x: 200, y: 400 } },
+      { id: '4', type: 'lfo', position: { x: 600, y: 400 } },
+    ],
+    connections: [],
   };
 }
 
-const patch: Patch = {
-  modules: [
-    { id: '1', type: 'lfo', position: getRandomPosition() },
-    { id: '2', type: 'lfo', position: getRandomPosition() },
-    { id: '3', type: 'lfo', position: getRandomPosition() },
-    { id: '4', type: 'lfo', position: getRandomPosition() },
-  ],
-  connections: [],
-};
-
 function App() {
+  const setPatch = usePatchStore((state) => state.setPatch);
+  const modules = usePatchStore((state) => state.modules);
+
+  useEffect(() => {
+    setPatch(createPatch());
+  }, [setPatch]);
+
   return (
     <>
       <h1>Patchwork</h1>
-      <PatchCanvas patch={patch} />
+      <PatchCanvas modules={modules ?? []} />
     </>
   );
 }
