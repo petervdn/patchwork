@@ -2,8 +2,10 @@ type Entity = {
   id: string;
 };
 
-type Input = Entity;
-type Output = Entity;
+export type Input = Entity;
+export type Output = Entity;
+
+export type TransputType = 'input' | 'output';
 
 export type Position = {
   x: number;
@@ -26,24 +28,4 @@ export type Connection = {
 export type Patch = {
   modules: Array<Module>;
   connections: Array<Connection>;
-};
-
-type ModuleDefinition = {
-  inputs: Array<Input>;
-  outputs: Array<Output>;
-};
-
-export const moduleDefinitions: Record<ModuleType, ModuleDefinition> = {
-  oscillator: {
-    inputs: [{ id: 'frequency' }],
-    outputs: [{ id: 'output' }],
-  },
-  gain: {
-    inputs: [{ id: 'input' }],
-    outputs: [{ id: 'output' }],
-  },
-  lfo: {
-    inputs: [{ id: 'frequency' }],
-    outputs: [{ id: 'output' }],
-  },
 };

@@ -3,6 +3,7 @@ import { useGesture } from '@use-gesture/react';
 import { useRef, useState } from 'react';
 import { useModule, usePatchStore } from '../../utils/patchStore.ts';
 import { Position } from '../../utils/types.ts';
+import { TransputRow } from '../TransputRow/TransputRow.tsx';
 
 type Props = {
   moduleId: string;
@@ -14,7 +15,7 @@ export function PatchModule({ moduleId }: Props) {
 
   const [dragOffset, setDragOffset] = useState<Position>({ x: 0, y: 0 });
 
-  const elementRef = useRef<HTMLDivElement>(null);
+  const draggableRef = useRef<HTMLDivElement>(null);
   useGesture(
     {
       onDrag: (state) => {
@@ -33,7 +34,7 @@ export function PatchModule({ moduleId }: Props) {
         }
       },
     },
-    { target: elementRef, eventOptions: { passive: false, capture: false } },
+    { target: draggableRef, eventOptions: { passive: false, capture: false } },
   );
 
   if (!module) {
@@ -42,15 +43,16 @@ export function PatchModule({ moduleId }: Props) {
 
   return (
     <div
-      ref={elementRef}
       className={classes.wrapper}
       style={{
         left: module.position.x + dragOffset.x,
         top: module.position.y + dragOffset.y,
       }}
     >
-      <h2>{module.type}</h2>
-      <div className={classes.content}>Content</div>
+      <TransputRow transputType="input" moduleType={module.type} />
+      <h2 ref={draggableRef}>{module.type}</h2>
+      <div className={classes.content}>[content]</div>
+      <TransputRow transputType="output" moduleType={module.type} />
     </div>
   );
 }

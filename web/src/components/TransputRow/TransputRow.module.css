@@ -1,0 +1,11 @@
+.wrapper {
+    display: flex;
+    margin-left: 10px;
+}
+
+.wrapper .transput {
+    background-color: #999;
+    width: 20px;
+    height: 10px;
+    margin-right: 10px;
+}

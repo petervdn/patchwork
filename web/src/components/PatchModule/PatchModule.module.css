@@ -1,23 +1,26 @@
 .wrapper {
-    background-color: white;
-    width: 200px;
-    height: 100px;
+    width: 300px;
+    height: 200px;
     position: absolute;
-    touch-action: none;
-    border-radius: 6px;
+    --roundedCorner: 4px;
+    /* filter: drop-shadow(1px 1px 5px #ddd); */
 }
 
 .wrapper h2 {
     padding: 5px 10px;
     margin: 0;
-    border-radius: 6px 6px 0 0;
+    border-radius: var(--roundedCorner) var(--roundedCorner) 0 0;
     background-color: var(--dark);
     color: var(--light);
-    font-size: 20px;
+    font-size: 16px;
     font-weight: unset;
+    touch-action: none;
 }
 
 .wrapper div.content {
     padding: 10px;
+    color: #aaa;
     margin: 0;
+    background-color: white;
+    border-radius: 0 0 var(--roundedCorner) var(--roundedCorner);
 }
