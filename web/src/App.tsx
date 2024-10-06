@@ -26,11 +26,11 @@ function App() {
   }, [setPatch]);
 
   return (
-    <>
+    <div style={{ margin: 20 }}>
       <h1>Patchwork</h1>
       <PatchCanvas modules={modules ?? []} />
       <AddModule />
-    </>
+    </div>
   );
 }
 

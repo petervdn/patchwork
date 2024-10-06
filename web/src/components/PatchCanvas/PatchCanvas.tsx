@@ -9,7 +9,6 @@ export function PatchCanvas({ modules }: Props) {
   return (
     <div
       style={{
-        margin: 20,
         height: 800,
         border: '1px solid ' + getComputedStyle(document.body).getPropertyValue('--dark'),
         position: 'relative',

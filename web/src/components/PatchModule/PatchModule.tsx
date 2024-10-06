@@ -1,4 +1,4 @@
-import './PatchModule.css';
+import classes from './PatchModule.module.css';
 import { useGesture } from '@use-gesture/react';
 import { useRef, useState } from 'react';
 import { useModule, usePatchStore } from '../../utils/patchStore.ts';
@@ -43,14 +43,14 @@ export function PatchModule({ moduleId }: Props) {
   return (
     <div
       ref={elementRef}
-      className="module"
+      className={classes.wrapper}
       style={{
         left: module.position.x + dragOffset.x,
         top: module.position.y + dragOffset.y,
       }}
     >
-      <h2>Module {moduleId}</h2>
-      <div>Content</div>
+      <h2>{module.type}</h2>
+      <div className={classes.content}>Content</div>
     </div>
   );
 }
