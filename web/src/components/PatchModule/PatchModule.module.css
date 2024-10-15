@@ -3,6 +3,7 @@
     position: absolute;
     --roundedCorner: 4px;
     /* filter: drop-shadow(1px 1px 5px #ddd); */
+    user-select: none;
 }
 
 .wrapper h2 {

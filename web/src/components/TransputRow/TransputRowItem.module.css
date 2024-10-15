@@ -1,0 +1,12 @@
+
+ .transput {
+    background-color: #999;
+    width: 22px;
+    height: 12px;
+    margin-right: 10px;
+     touch-action: none;
+}
+
+ .transput:hover {
+    background-color: var(--bamboo);
+}

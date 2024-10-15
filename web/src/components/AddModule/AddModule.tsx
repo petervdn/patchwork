@@ -1,14 +1,16 @@
-import { usePatchStore } from '../../utils/patchStore.ts';
-import { ModuleType, moduleTypes } from '../../utils/types.ts';
 import classes from './AddModule.module.css';
 import { useRef } from 'react';
+import { ModuleType, moduleTypes } from '../../types/Module.ts';
+import { addModule } from '../../data/patchStore.ts';
 
 export function AddModule() {
-  const addModule = usePatchStore((state) => state.addModule);
   const selectRef = useRef<HTMLSelectElement>(null);
 
   const onAddModuleClick = () => {
-    addModule(selectRef.current?.value as ModuleType);
+    addModule({
+      type: selectRef.current?.value as ModuleType,
+      position: { x: 500 * Math.random(), y: 500 * Math.random() },
+    });
   };
 
   return (

@@ -16,7 +16,7 @@
   --medium: #686D76;
   --bamboo: #DC5F00;
 
-  background-color: var(--light);
+  background-color: #555;
 }
 h1 {
   margin: 0;

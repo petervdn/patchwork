@@ -1,11 +1,9 @@
-import { Patch } from '../../utils/types.ts';
 import { PatchModule } from '../PatchModule/PatchModule.tsx';
+import { usePatchModules } from '../../data/patchStore.ts';
 
-type Props = {
-  modules: Patch['modules'];
-};
+export function PatchCanvas() {
+  const modules = usePatchModules();
 
-export function PatchCanvas({ modules }: Props) {
   return (
     <div
       style={{
@@ -15,7 +13,7 @@ export function PatchCanvas({ modules }: Props) {
       }}
     >
       {modules.map((module) => (
-        <PatchModule moduleId={module.id} key={module.id} />
+        <PatchModule module={module} key={module.id} />
       ))}
     </div>
   );

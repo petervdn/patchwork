@@ -1,23 +1,16 @@
 import classes from './TransputRow.module.css';
-import { ModuleType, TransputType } from '../../utils/types.ts';
-import { getModuleDefinition } from '../../data/moduleDefinitions.ts';
-import { useMemo } from 'react';
+import { TransputRowItem } from './TransputRowItem.tsx';
+import { Transput } from '../../types/Transput.ts';
 
 type Props = {
-  transputType: TransputType;
-  moduleType: ModuleType;
+  transputs: Array<Transput>;
 };
 
-export function TransputRow({ transputType, moduleType }: Props) {
-  const transputs = useMemo(() => {
-    const moduleDefinition = getModuleDefinition(moduleType);
-    return transputType === 'input' ? moduleDefinition.inputs : moduleDefinition.outputs;
-  }, [moduleType, transputType]);
-
+export function TransputRow({ transputs }: Props) {
   return (
     <div className={classes.wrapper}>
       {transputs.map((transput) => {
-        return <div key={transput.id} className={classes.transput} />;
+        return <TransputRowItem transput={transput} key={transput.id} />;
       })}
     </div>
   );

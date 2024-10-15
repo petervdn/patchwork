@@ -1,45 +1,36 @@
 import classes from './PatchModule.module.css';
-import { useGesture } from '@use-gesture/react';
-import { useRef, useState } from 'react';
-import { useModule, usePatchStore } from '../../utils/patchStore.ts';
-import { Position } from '../../utils/types.ts';
 import { TransputRow } from '../TransputRow/TransputRow.tsx';
+import { useRef, useState } from 'react';
+import { useDrag } from '@use-gesture/react';
+import { Position } from '../../types/types.ts';
+import { BaseModule } from '../../types/Module.ts';
 
 type Props = {
-  moduleId: string;
+  module: BaseModule;
 };
 
-export function PatchModule({ moduleId }: Props) {
-  const module = useModule(moduleId);
-  const updateModule = usePatchStore((state) => state.updateModule);
-
+export function PatchModule({ module }: Props) {
   const [dragOffset, setDragOffset] = useState<Position>({ x: 0, y: 0 });
 
-  const draggableRef = useRef<HTMLDivElement>(null);
-  useGesture(
-    {
-      onDrag: (state) => {
-        if (!module) {
-          return;
-        }
-        setDragOffset({ x: state.movement[0], y: state.movement[1] });
-        if (state.last) {
-          setDragOffset({ x: 0, y: 0 });
-          updateModule(moduleId, {
-            position: {
-              x: module.position.x + dragOffset.x,
-              y: module.position.y + dragOffset.y,
-            },
-          });
-        }
-      },
+  const headerRef = useRef<HTMLDivElement>(null);
+  useDrag(
+    (state) => {
+      if (!module) {
+        return;
+      }
+      setDragOffset({ x: state.movement[0], y: state.movement[1] });
+      if (state.last) {
+        setDragOffset({ x: 0, y: 0 });
+        // updateModule(moduleId, {
+        //   position: {
+        //     x: module.position.x + dragOffset.x,
+        //     y: module.position.y + dragOffset.y,
+        //   },
+        // });
+      }
     },
-    { target: draggableRef, eventOptions: { passive: false, capture: false } },
+    { target: headerRef },
   );
-
-  if (!module) {
-    return null;
-  }
 
   return (
     <div
@@ -49,10 +40,12 @@ export function PatchModule({ moduleId }: Props) {
         top: module.position.y + dragOffset.y,
       }}
     >
-      <TransputRow transputType="input" moduleType={module.type} />
-      <h2 ref={draggableRef}>{module.type}</h2>
+      <TransputRow transputs={module.transputs.in} />
+      <h2 ref={headerRef}>
+        {module.type} (id={module.id})
+      </h2>
       <div className={classes.content}>[content]</div>
-      <TransputRow transputType="output" moduleType={module.type} />
+      <TransputRow transputs={module.transputs.out} />
     </div>
   );
 }
