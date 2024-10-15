@@ -1,7 +1,7 @@
-import { BaseModule, ModuleType } from '../types/Module.ts';
+import { Module, ModuleType } from '../types/Module.ts';
 import { run } from './run.ts';
 
-export function getModuleTransputs(moduleType: ModuleType): BaseModule['transputs'] {
+export function getModuleTransputs(moduleType: ModuleType): Module['transputs'] {
   const transputsDefinition = run(() => {
     switch (moduleType) {
       case 'oscillator':

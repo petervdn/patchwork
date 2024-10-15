@@ -1,7 +1,7 @@
-import { BaseModule } from './Module.ts';
+import { Module } from './Module.ts';
 import { Connection } from './Connection.ts';
 
 export type Patch = {
-  modules: Array<BaseModule>;
+  modules: Array<Module>;
   connections: Array<Connection>;
 };

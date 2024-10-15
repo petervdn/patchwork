@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { Patch } from '../types/Patch.ts';
-import { BaseModule, ModuleType } from '../types/Module.ts';
+import { Module, ModuleType } from '../types/Module.ts';
 import { Position } from '../types/types.ts';
 import { produce } from 'immer';
 import { getModuleTransputs } from '../utils/getModuleTransputs.ts';
@@ -36,6 +36,15 @@ export function addModule({ type, position }: { type: ModuleType; position: Posi
   });
 }
 
+export function updateModule(module: Pick<Module, 'id' | 'position'>): void {
+  usePatchStore.setState((state) => {
+    return produce(state, (draftState) => {
+      const moduleIndex = draftState.patch.modules.findIndex((m) => m.id === module.id);
+      draftState.patch.modules[moduleIndex].position = module.position;
+    });
+  });
+}
+
 function createNewModule({
   id,
   position,
@@ -44,7 +53,7 @@ function createNewModule({
   type: ModuleType;
   position: Position;
   id: string;
-}): BaseModule {
+}): Module {
   return {
     id,
     type,
