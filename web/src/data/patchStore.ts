@@ -3,7 +3,8 @@ import { Patch } from '../types/Patch.ts';
 import { Module, ModuleType } from '../types/Module.ts';
 import { Position } from '../types/types.ts';
 import { produce } from 'immer';
-import { getModuleTransputs } from '../utils/getModuleTransputs.ts';
+import { createNewModule } from '../utils/createNewModule.ts';
+import { TransputType } from '../types/Transput.ts';
 
 type PatchStoreState = {
   patch: Patch;
@@ -21,6 +22,40 @@ export const usePatchStore = create<PatchStoreState>(() => ({
 }));
 
 export const usePatchModules = () => usePatchStore((state) => state.patch.modules);
+export const usePatchModule = (id: string) =>
+  usePatchStore((state) => state.patch.modules.find((m) => m.id === id));
+
+export const usePatchModuleTransput = ({
+  moduleId,
+  transputId,
+  transputType,
+}: {
+  transputId: string;
+  moduleId: string;
+  transputType: TransputType;
+}) => {
+  return usePatchStore((state) => {
+    const module = state.patch.modules.find((m) => m.id === moduleId);
+
+    if (!module) return null;
+    const transputs = transputType === 'input' ? module.transputs.in : module.transputs.out;
+    return transputs.find((t) => t.id === transputId);
+  });
+};
+
+export const usePatchModuleTransputs = ({
+  transputType,
+  moduleId,
+}: {
+  moduleId: string;
+  transputType: TransputType;
+}) => {
+  return usePatchStore((state) => {
+    const module = state.patch.modules.find((m) => m.id === moduleId);
+    if (!module) return null;
+    return transputType === 'input' ? module.transputs.in : module.transputs.out;
+  });
+};
 
 export function addModule({ type, position }: { type: ModuleType; position: Position }): void {
   usePatchStore.setState((state) => {
@@ -36,6 +71,8 @@ export function addModule({ type, position }: { type: ModuleType; position: Posi
   });
 }
 
+export function addConnection(): void {}
+
 export function updateModule(module: Pick<Module, 'id' | 'position'>): void {
   usePatchStore.setState((state) => {
     return produce(state, (draftState) => {
@@ -43,22 +80,4 @@ export function updateModule(module: Pick<Module, 'id' | 'position'>): void {
       draftState.patch.modules[moduleIndex].position = module.position;
     });
   });
-}
-
-function createNewModule({
-  id,
-  position,
-  type,
-}: {
-  type: ModuleType;
-  position: Position;
-  id: string;
-}): Module {
-  return {
-    id,
-    type,
-    position,
-    transputs: getModuleTransputs(type),
-    attributes: [],
-  };
 }

@@ -13,7 +13,7 @@ export function PatchCanvas() {
       }}
     >
       {modules.map((module) => (
-        <PatchModule module={module} key={module.id} />
+        <PatchModule moduleId={module.id} key={module.id} />
       ))}
     </div>
   );

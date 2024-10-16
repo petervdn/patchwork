@@ -1,16 +1,31 @@
 import classes from './TransputRow.module.css';
 import { TransputRowItem } from './TransputRowItem.tsx';
-import { Transput } from '../../types/Transput.ts';
+import { TransputType } from '../../types/Transput.ts';
+import { usePatchModuleTransputs } from '../../data/patchStore.ts';
 
 type Props = {
-  transputs: Array<Transput>;
+  moduleId: string;
+  transputType: TransputType;
 };
 
-export function TransputRow({ transputs }: Props) {
+export function TransputRow({ transputType, moduleId }: Props) {
+  const transputs = usePatchModuleTransputs({ moduleId, transputType });
+
+  if (!transputs) {
+    return null;
+  }
+
   return (
     <div className={classes.wrapper}>
       {transputs.map((transput) => {
-        return <TransputRowItem transput={transput} key={transput.id} />;
+        return (
+          <TransputRowItem
+            key={transput.id}
+            transputId={transput.id}
+            moduleId={moduleId}
+            transputType={transputType}
+          />
+        );
       })}
     </div>
   );

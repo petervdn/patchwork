@@ -1,14 +1,19 @@
 import classes from './TransputRowItem.module.css';
 import { useRef } from 'react';
 import { useGesture } from '@use-gesture/react';
-import { Transput } from '../../types/Transput.ts';
+import { TransputType } from '../../types/Transput.ts';
+import { usePatchModuleTransput } from '../../data/patchStore.ts';
 
 type Props = {
-  transput: Transput;
+  transputId: string;
+  moduleId: string;
+  transputType: TransputType;
 };
 
-export function TransputRowItem({ transput }: Props) {
+export function TransputRowItem({ transputId, moduleId, transputType }: Props) {
   const transputRef = useRef<HTMLDivElement>(null);
+
+  const transput = usePatchModuleTransput({ transputId, moduleId, transputType });
 
   useGesture(
     {
@@ -22,6 +27,9 @@ export function TransputRowItem({ transput }: Props) {
 
     { target: transputRef, drag: { pointer: { capture: false } } },
   );
+  const onClick = () => {
+    console.log({ transput });
+  };
 
-  return <div key={transput.id} className={classes.transput} ref={transputRef} />;
+  return <div className={classes.transput} ref={transputRef} onClick={onClick} />;
 }
