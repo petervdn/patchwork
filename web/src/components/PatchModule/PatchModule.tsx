@@ -3,7 +3,8 @@ import { TransputRow } from '../TransputRow/TransputRow.tsx';
 import { useRef, useState } from 'react';
 import { useDrag } from '@use-gesture/react';
 import { Position } from '../../types/types.ts';
-import { updateModule, usePatchModule } from '../../data/patchStore.ts';
+import { updateModule } from '../../stores/patch/patchStore.ts';
+import { useModule } from '../../stores/patch/hooks/useModule.ts';
 
 type Props = {
   moduleId: string;
@@ -11,7 +12,7 @@ type Props = {
 
 export function PatchModule({ moduleId }: Props) {
   const [dragOffset, setDragOffset] = useState<Position>({ x: 0, y: 0 });
-  const module = usePatchModule(moduleId);
+  const module = useModule(moduleId);
 
   const headerRef = useRef<HTMLDivElement>(null);
   useDrag(

@@ -1,20 +1,33 @@
 import './App.css';
 import { PatchCanvas } from './components/PatchCanvas/PatchCanvas.tsx';
 import { AddModule } from './components/AddModule/AddModule.tsx';
+import { useUiStore } from './utils/uiStore.ts';
+import { useConnections } from './stores/patch/hooks/useConnections.ts';
 
 function App() {
+  const connectionDragStart = useUiStore((state) => state.connectionDragStart);
+  const connections = useConnections();
+
   return (
     <div style={{ margin: 20 }}>
       <h1>Patchwork</h1>
       <PatchCanvas />
       <AddModule />
-      {/*<div>*/}
-      {/*  {connections?.map((connection) => (*/}
-      {/*    <>*/}
-      {/*      Connection from {connection.from.id} to {connection.to.id}*/}
-      {/*    </>*/}
-      {/*  ))}*/}
-      {/*</div>*/}
+      {connectionDragStart && (
+        <>
+          <h3>module: {connectionDragStart.moduleId}</h3>
+          <h3>transput: {connectionDragStart.transputType}</h3>
+          <h3>transput: {connectionDragStart.transputId}</h3>
+        </>
+      )}
+      <div>
+        {connections.map((connection, index) => (
+          // todo create unique ids for connections
+          <div key={index}>
+            Connection from {connection.from.moduleId} to {connection.to.moduleId}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

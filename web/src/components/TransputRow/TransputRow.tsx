@@ -1,7 +1,7 @@
 import classes from './TransputRow.module.css';
 import { TransputRowItem } from './TransputRowItem.tsx';
 import { TransputType } from '../../types/Transput.ts';
-import { usePatchModuleTransputs } from '../../data/patchStore.ts';
+import { useModuleTransputs } from '../../stores/patch/hooks/useModuleTransputs.ts';
 
 type Props = {
   moduleId: string;
@@ -9,7 +9,7 @@ type Props = {
 };
 
 export function TransputRow({ transputType, moduleId }: Props) {
-  const transputs = usePatchModuleTransputs({ moduleId, transputType });
+  const transputs = useModuleTransputs({ moduleId, transputType });
 
   if (!transputs) {
     return null;

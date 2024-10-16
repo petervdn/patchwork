@@ -1,9 +1,9 @@
 import { create } from 'zustand';
-
-type TransputIdentifier = { moduleId: string; transputId: string };
+import { TransputIdentifier } from '../types/Connection.ts';
 
 type UiStore = {
   connectionDragStart: TransputIdentifier | undefined;
+  setConnectionDragStart: (connectionDragStart: TransputIdentifier) => void;
 };
 
 export const useUiStore = create<UiStore>((set) => ({

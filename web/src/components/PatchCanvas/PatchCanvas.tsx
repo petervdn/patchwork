@@ -1,8 +1,8 @@
 import { PatchModule } from '../PatchModule/PatchModule.tsx';
-import { usePatchModules } from '../../data/patchStore.ts';
+import { useModules } from '../../stores/patch/hooks/useModules.ts';
 
 export function PatchCanvas() {
-  const modules = usePatchModules();
+  const modules = useModules();
 
   return (
     <div

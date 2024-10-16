@@ -1,7 +1,7 @@
 import classes from './AddModule.module.css';
 import { useRef } from 'react';
 import { ModuleType, moduleTypes } from '../../types/Module.ts';
-import { addModule } from '../../data/patchStore.ts';
+import { addModule } from '../../stores/patch/patchStore.ts';
 
 export function AddModule() {
   const selectRef = useRef<HTMLSelectElement>(null);
