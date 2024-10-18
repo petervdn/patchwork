@@ -5,7 +5,7 @@ import { produce } from 'immer';
 import { createNewModule } from '../../utils/createNewModule.ts';
 
 import { Connection, TransputIdentifier } from '../../types/Connection.ts';
-import { validateConnection } from '../../utils/validateConnection.ts';
+import { createConnection } from '../../utils/createConnection.ts';
 
 type PatchStoreState = {
   modules: Array<Module>;
@@ -32,26 +32,18 @@ export function addModule({ type, position }: { type: ModuleType; position: Posi
   });
 }
 
-export function addConnection({
-  to,
-  from,
-}: {
-  from: TransputIdentifier;
-  to: TransputIdentifier;
-}): void {
-  validateConnection({ from, to });
+export function addConnection(transput1: TransputIdentifier, transput2: TransputIdentifier): void {
+  try {
+    const connection = createConnection(transput1, transput2);
 
-  usePatchStore.setState((state) => {
-    return {
-      connections: [
-        ...state.connections,
-        {
-          from,
-          to,
-        },
-      ],
-    };
-  });
+    usePatchStore.setState((state) => {
+      return {
+        connections: [...state.connections, connection],
+      };
+    });
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 export function updateModule(module: Pick<Module, 'id' | 'position'>): void {

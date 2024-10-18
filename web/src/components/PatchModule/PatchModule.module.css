@@ -2,7 +2,6 @@
     #width: 300px;
     position: absolute;
     --roundedCorner: 4px;
-    /* filter: drop-shadow(1px 1px 5px #ddd); */
     user-select: none;
 }
 
@@ -12,7 +11,7 @@
     #background-color: var(--darkblue);
     background-color: white;
     #color: var(--light);
-    font-size: 12px;
+    font-size: 14px;
     font-weight: unset;
     touch-action: none;
 }
