@@ -6,3 +6,8 @@ export type Position = {
 export type Entity = {
   id: string;
 };
+
+export type Size = {
+  width: number;
+  height: number;
+};

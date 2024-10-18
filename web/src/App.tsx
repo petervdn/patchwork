@@ -1,5 +1,5 @@
 import './App.css';
-import { PatchCanvas } from './components/PatchCanvas/PatchCanvas.tsx';
+import { PatchViewport } from './components/PatchViewport/PatchViewport.tsx';
 import { AddModule } from './components/AddModule/AddModule.tsx';
 import { useUiStore } from './utils/uiStore.ts';
 import { useConnections } from './stores/patch/hooks/useConnections.ts';
@@ -11,7 +11,7 @@ function App() {
   return (
     <div style={{ margin: 20 }}>
       <h1>Patchwork</h1>
-      <PatchCanvas />
+      <PatchViewport />
       <AddModule />
       {connectionDragStart && (
         <>
