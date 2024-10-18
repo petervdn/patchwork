@@ -5,6 +5,7 @@ import { TransputType } from '../../types/Transput.ts';
 import { useUiStore } from '../../utils/uiStore.ts';
 import { useModuleTransput } from '../../stores/patch/hooks/useModuleTransput.ts';
 import { addConnection } from '../../stores/patch/patchStore.ts';
+import { useRegisterTransputRef } from '../../utils/hooks/useRegisterTransputRef.ts';
 
 type Props = {
   transputId: string;
@@ -20,9 +21,11 @@ export function TransputRowItem({ transputId, moduleId, transputType }: Props) {
   const transput = useModuleTransput({ transputId, moduleId, transputType });
 
   const transputIdentifier = useMemo(
-    () => ({ moduleId, transputId, transputType, ref: transputRef }),
+    () => ({ moduleId, transputId, transputType }),
     [moduleId, transputId, transputType],
   );
+
+  useRegisterTransputRef({ transputIdentifier, transputRef });
 
   useGesture(
     {
