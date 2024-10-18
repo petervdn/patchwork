@@ -1,12 +1,12 @@
 
  .transput {
-    background-color: #999;
-    width: 22px;
-    height: 12px;
-    margin-right: 10px;
+     background-color: black;
+     width: 22px;
+     height: 12px;
+     margin-left: 20px;
      touch-action: none;
 }
 
  .transput:hover {
-    background-color: var(--bamboo);
+     background-color: var(--bamboo);
 }

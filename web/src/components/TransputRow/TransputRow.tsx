@@ -2,6 +2,7 @@ import classes from './TransputRow.module.css';
 import { TransputRowItem } from './TransputRowItem.tsx';
 import { TransputType } from '../../types/Transput.ts';
 import { useModuleTransputs } from '../../stores/patch/hooks/useModuleTransputs.ts';
+import classNames from 'classnames';
 
 type Props = {
   moduleId: string;
@@ -16,7 +17,12 @@ export function TransputRow({ transputType, moduleId }: Props) {
   }
 
   return (
-    <div className={classes.wrapper}>
+    <div
+      className={classNames(
+        classes.wrapper,
+        transputType === 'input' ? classes.top : classes.bottom,
+      )}
+    >
       {transputs.map((transput) => {
         return (
           <TransputRowItem

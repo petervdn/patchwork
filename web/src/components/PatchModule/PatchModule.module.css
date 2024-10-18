@@ -1,5 +1,5 @@
 .wrapper {
-    width: 300px;
+    #width: 300px;
     position: absolute;
     --roundedCorner: 4px;
     /* filter: drop-shadow(1px 1px 5px #ddd); */
@@ -9,10 +9,10 @@
 .wrapper h2 {
     padding: 5px 10px;
     margin: 0;
-    border-radius: var(--roundedCorner) var(--roundedCorner) 0 0;
-    background-color: var(--dark);
-    color: var(--light);
-    font-size: 16px;
+    #background-color: var(--darkblue);
+    background-color: white;
+    #color: var(--light);
+    font-size: 12px;
     font-weight: unset;
     touch-action: none;
 }
@@ -22,5 +22,5 @@
     color: #aaa;
     margin: 0;
     background-color: white;
-    border-radius: 0 0 var(--roundedCorner) var(--roundedCorner);
+    #border-radius: 0 0 var(--roundedCorner) var(--roundedCorner);
 }

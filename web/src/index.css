@@ -11,10 +11,13 @@
   /*text-rendering: optimizeLegibility;*/
   /*-webkit-font-smoothing: antialiased;*/
   /*-moz-osx-font-smoothing: grayscale;*/
-  --light: #EEEEEE;
-  --dark: #373A40;
-  --medium: #686D76;
   --bamboo: #DC5F00;
+  --darkblue: #6482AD;
+  --lightblue: #7FA1C3;
+  --light: #F5EDED;
+  --dark: #373A40;
+  --medium: #E2DAD6;
+
 
   background-color: #F5EDED;
 }
