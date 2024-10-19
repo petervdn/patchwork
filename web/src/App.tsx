@@ -14,6 +14,8 @@ todo:
 - add knobs from trigger riot
 - don't allow dragging module outside viewport
 - use svg for connections
+- connections should update on drag
+- refactor current drag approach with own approach (+update module every drag)
  */
 
 function App() {
