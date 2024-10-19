@@ -49,6 +49,7 @@ export function PatchModule({ moduleId }: Props) {
         top: module.position.y + dragOffset.y,
       }}
     >
+      {/* todo: pass ref to component? */}
       <div ref={headerRef} style={{ touchAction: 'none' }}>
         <PatchModuleHeader module={module} />
       </div>

@@ -1,4 +1,12 @@
 .header {
     background-color: #7FA1C3;
     margin-bottom: 20px;
+
+    & h2 {
+        padding: 5px 10px;
+        margin: 0;
+        font-size: 14px;
+        font-weight: unset;
+        touch-action: none;
+    }
 }

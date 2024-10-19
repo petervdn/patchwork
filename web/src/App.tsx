@@ -3,6 +3,19 @@ import { PatchViewport } from './components/PatchViewport/PatchViewport.tsx';
 import { Controls } from './components/Controls/Controls.tsx';
 import { useUiStore } from './utils/uiStore.ts';
 
+/*
+todo:
+- linting for css
+- pre commit hook
+- dragging a module should bring it to the front
+- allow dragging of viewport
+- allow zooming of viewport?
+- draw grid in background
+- add knobs from trigger riot
+- don't allow dragging module outside viewport
+- use svg for connections
+ */
+
 function App() {
   const connectionDragStart = useUiStore((state) => state.connectionDragStart);
 
