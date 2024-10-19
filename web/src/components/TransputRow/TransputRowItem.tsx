@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { TransputType } from '../../types/Transput.ts';
 import { useUiStore } from '../../utils/uiStore.ts';
 import { addConnection } from '../../stores/patch/patchStore.ts';
-import { useRegisterTransputRef } from '../../utils/hooks/useRegisterTransputRef.ts';
+import { useRegisterTransputElementRef } from '../../utils/hooks/useRegisterTransputElementRef.ts';
 
 type Props = {
   transputId: string;
@@ -24,11 +24,10 @@ export function TransputRowItem({ transputId, moduleId, transputType }: Props) {
     [moduleId, transputId, transputType],
   );
 
-  useRegisterTransputRef({ transputIdentifier, transputRef });
+  useRegisterTransputElementRef({ transputIdentifier, transputRef });
 
   useEffect(() => {
     function onMouseUp() {
-      console.log('window mouse up');
       setMouseDown(false);
       setConnectionDragStart(undefined);
     }
@@ -48,7 +47,6 @@ export function TransputRowItem({ transputId, moduleId, transputType }: Props) {
   }, [setConnectionDragStart, transputIdentifier]);
 
   const onMouseUp = () => {
-    console.log('onMouseUp');
     if (!connectionDragStart) {
       return;
     }

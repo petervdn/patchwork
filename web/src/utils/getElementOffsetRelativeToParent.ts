@@ -1,14 +1,14 @@
 export function getElementOffsetRelativeToParent(
   element: HTMLElement,
   levelsUp: number,
-): { top: number; left: number } | null {
+): { top: number; left: number } {
   let parent: HTMLElement | null = element;
 
   for (let i = 0; i < levelsUp; i++) {
     if (parent) {
       parent = parent.parentElement;
     } else {
-      return null;
+      return { top: 0, left: 0 };
     }
   }
 
@@ -22,5 +22,5 @@ export function getElementOffsetRelativeToParent(
     };
   }
 
-  return null;
+  return { top: 0, left: 0 };
 }

@@ -1,5 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { Size } from '../../types/types.ts';
+import { useConnections } from '../../stores/patch/hooks/useConnections.ts';
+import { drawConnection } from '../../utils/canvas/drawConnection.ts';
+import { transputElementRefs } from '../../stores/transputElementRefs.ts';
 
 type Props = {
   size: Size;
@@ -7,6 +10,9 @@ type Props = {
 
 export function PatchViewportBackground({ size }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const contextRef = useRef<CanvasRenderingContext2D | undefined | null>(undefined);
+
+  const connections = useConnections();
 
   useEffect(() => {
     if (!canvasRef.current) {
@@ -17,15 +23,25 @@ export function PatchViewportBackground({ size }: Props) {
   }, [size.height, size.width]);
 
   useEffect(() => {
-    if (!canvasRef.current) {
+    contextRef.current = canvasRef.current?.getContext('2d');
+
+    if (!contextRef.current) {
       return;
     }
 
-    const context = canvasRef.current.getContext('2d')!;
-
-    context.fillStyle = '#E2DAD6';
-    context.fillRect(10, 10, size.width - 20, size.height - 20);
+    contextRef.current.fillStyle = '#E2DAD6';
+    contextRef.current.fillRect(0, 0, size.width, size.height);
   }, [size.height, size.width]);
+
+  useEffect(() => {
+    if (!contextRef.current) {
+      return;
+    }
+
+    for (const connection of connections) {
+      drawConnection({ transputElementRefs, context: contextRef.current, connection });
+    }
+  }, [connections]);
 
   return (
     <div>

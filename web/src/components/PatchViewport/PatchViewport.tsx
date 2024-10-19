@@ -39,10 +39,10 @@ export function PatchViewport() {
         position: 'relative',
       }}
     >
-      {viewportSize && <PatchViewportBackground size={viewportSize} />}
       {modules.map((module) => (
         <PatchModule moduleId={module.id} key={module.id} />
       ))}
+      {viewportSize && <PatchViewportBackground size={viewportSize} />}
     </div>
   );
 }
