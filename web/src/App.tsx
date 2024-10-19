@@ -1,6 +1,6 @@
 import './App.css';
 import { PatchViewport } from './components/PatchViewport/PatchViewport.tsx';
-import { AddModule } from './components/AddModule/AddModule.tsx';
+import { Controls } from './components/Controls/Controls.tsx';
 import { useUiStore } from './utils/uiStore.ts';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <div style={{ margin: 20 }}>
       <h1>Patchwork</h1>
       <PatchViewport />
-      <AddModule />
+      <Controls />
       {connectionDragStart && (
         <>
           <h3>module: {connectionDragStart.moduleId}</h3>

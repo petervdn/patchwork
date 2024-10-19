@@ -9,6 +9,7 @@ type PatchStoreState = {
 
 export const usePatchStore = create<PatchStoreState>(() => ({
   // todo: these should be objects for faster lookup
+  // todo: nest again?
   modules: [],
   connections: [],
 }));

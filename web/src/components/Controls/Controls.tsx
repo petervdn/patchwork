@@ -1,11 +1,12 @@
-import classes from './AddModule.module.css';
+import classes from './Controls.module.css';
 import { useRef } from 'react';
 import { ModuleType, moduleTypes } from '../../types/Module.ts';
 import { downloadAsJson } from '../../utils/downloadAsJson.ts';
 import { patchToJson } from '../../stores/patch/utils/patchToJson.ts';
 import { addModule } from '../../stores/patch/utils/addModule.ts';
+import { LoadPatch } from './LoadPatch.tsx';
 
-export function AddModule() {
+export function Controls() {
   const selectRef = useRef<HTMLSelectElement>(null);
 
   const onAddModuleClick = () => {
@@ -16,7 +17,7 @@ export function AddModule() {
   };
 
   const onToJsonClick = () => {
-    downloadAsJson(patchToJson());
+    downloadAsJson('patch.pw', patchToJson());
   };
 
   return (
@@ -30,6 +31,7 @@ export function AddModule() {
         ))}
       </select>
       <button onClick={onToJsonClick}>to JSON</button>
+      <LoadPatch />
     </div>
   );
 }
