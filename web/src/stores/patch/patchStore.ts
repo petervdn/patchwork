@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import omit from 'lodash/omit';
 import { Module, ModuleType } from '../../types/Module.ts';
 import { Position } from '../../types/types.ts';
 import { produce } from 'immer';
@@ -13,6 +14,7 @@ type PatchStoreState = {
 };
 
 export const usePatchStore = create<PatchStoreState>(() => ({
+  // todo: these should be objects for faster lookup
   modules: [],
   connections: [],
 }));
@@ -53,4 +55,18 @@ export function updateModule(module: Pick<Module, 'id' | 'position'>): void {
       draftState.modules[moduleIndex].position = module.position;
     });
   });
+}
+
+export function toJson(): string {
+  const state = usePatchStore.getState();
+  const toJsonModules = state.modules.map((module) => {
+    return omit(module, 'transputs');
+  });
+
+  const toJsonState = {
+    modules: toJsonModules,
+    connections: state.connections,
+  };
+
+  return JSON.stringify(toJsonState, null, 2);
 }
