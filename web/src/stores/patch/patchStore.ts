@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { Module, ModuleType } from '../../types/Module.ts';
 import { Position } from '../../types/types.ts';
 import { produce } from 'immer';
-import { createNewModule } from '../../utils/createNewModule.ts';
+import { createModule } from '../../utils/createModule.ts';
 
 import { Connection, TransputIdentifier } from '../../types/Connection.ts';
 import { createConnection } from '../../utils/createConnection.ts';
@@ -22,7 +22,7 @@ export function addModule({ type, position }: { type: ModuleType; position: Posi
     return {
       modules: [
         ...state.modules,
-        createNewModule({
+        createModule({
           id: `module-${state.modules.length}`,
           type,
           position,

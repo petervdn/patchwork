@@ -1,6 +1,6 @@
 .wrapper {
-    display: flex;
-    background-color: var(--lightblue);
+
+
 
     &.top {
         border-radius: var(--roundedCorner) var(--roundedCorner) 0 0;

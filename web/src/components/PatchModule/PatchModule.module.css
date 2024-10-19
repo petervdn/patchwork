@@ -3,23 +3,34 @@
     position: absolute;
     --roundedCorner: 4px;
     user-select: none;
+    background-color: white;
+
+    & h2 {
+        padding: 5px 10px;
+        margin: 0;
+        font-size: 14px;
+        font-weight: unset;
+        touch-action: none;
+    }
+
+    & .contentWrapper {
+        display: flex;
+        margin: 20px 0;
+
+        & .transputs {
+            width: 50px;
+        }
+
+        & .content {
+            width: 300px;
+            padding: 0 20px;
+            color: #aaa;
+            #border-radius: 0 0 var(--roundedCorner) var(--roundedCorner);
+        }
+    }
+
+
+
 }
 
-.wrapper h2 {
-    padding: 5px 10px;
-    margin: 0;
-    #background-color: var(--darkblue);
-    background-color: white;
-    #color: var(--light);
-    font-size: 14px;
-    font-weight: unset;
-    touch-action: none;
-}
 
-.wrapper div.content {
-    padding: 10px;
-    color: #aaa;
-    margin: 0;
-    background-color: white;
-    #border-radius: 0 0 var(--roundedCorner) var(--roundedCorner);
-}

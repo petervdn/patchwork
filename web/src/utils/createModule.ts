@@ -2,7 +2,7 @@ import { Module, ModuleType } from '../types/Module.ts';
 import { Position } from '../types/types.ts';
 import { getModuleTransputs } from './getModuleTransputs.ts';
 
-export function createNewModule({
+export function createModule({
   id,
   position,
   type,

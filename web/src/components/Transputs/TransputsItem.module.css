@@ -1,10 +1,8 @@
 
  .transput {
      background-color: black;
-     width: 22px;
-     height: 12px;
-     margin-left: 20px;
-     touch-action: none;
+     color: white;
+     margin-bottom: 10px;
 }
 
  .transput:hover {

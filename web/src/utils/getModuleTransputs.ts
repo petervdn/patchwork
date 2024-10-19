@@ -6,7 +6,7 @@ export function getModuleTransputs(moduleType: ModuleType): Module['transputs'] 
     switch (moduleType) {
       case 'oscillator':
         return {
-          inputs: ['frequency', 'waveform'],
+          inputs: ['frequency', 'waveform', 'amp'],
           outputs: ['output'],
         };
       case 'gain':

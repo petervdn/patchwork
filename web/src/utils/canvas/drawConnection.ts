@@ -3,6 +3,8 @@ import { TransputElementRefs } from '../../stores/transputElementRefs.ts';
 import { getStringifiedTransputId } from '../getStringifiedTransputId.ts';
 import { getElementOffsetRelativeToParent } from '../getElementOffsetRelativeToParent.ts';
 
+const inset = 2; // amount of pixels to inset the connection from the edge of the transput
+
 export function drawConnection({
   connection,
   context,
@@ -19,20 +21,22 @@ export function drawConnection({
     return;
   }
 
+  // todo getBoundingClientRect is also done in getElementOffsetRelativeToParent below
   const transputRect = fromElementRef.current.getBoundingClientRect();
 
   // todo better approach for the magic number
-  const fromOffset = getElementOffsetRelativeToParent(fromElementRef.current, 3);
-  const toOffset = getElementOffsetRelativeToParent(toElementRef.current, 3);
+  const parentsToCanvas = 5;
+  const fromOffset = getElementOffsetRelativeToParent(fromElementRef.current, parentsToCanvas);
+  const toOffset = getElementOffsetRelativeToParent(toElementRef.current, parentsToCanvas);
 
   const from = {
-    left: fromOffset.left + transputRect.width / 2,
-    top: fromOffset.top + transputRect.height,
+    left: fromOffset.left + transputRect.width - inset,
+    top: fromOffset.top + transputRect.height / 2,
   };
 
   const to = {
-    left: toOffset.left + transputRect.width / 2,
-    top: toOffset.top,
+    left: toOffset.left + inset,
+    top: toOffset.top + transputRect.height / 2,
   };
 
   context.beginPath();

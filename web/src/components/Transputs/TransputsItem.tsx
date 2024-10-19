@@ -1,4 +1,4 @@
-import classes from './TransputRowItem.module.css';
+import classes from './TransputsItem.module.css';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { TransputType } from '../../types/Transput.ts';
 import { useUiStore } from '../../utils/uiStore.ts';
@@ -11,7 +11,7 @@ type Props = {
   transputType: TransputType;
 };
 
-export function TransputRowItem({ transputId, moduleId, transputType }: Props) {
+export function TransputsItem({ transputId, moduleId, transputType }: Props) {
   const transputRef = useRef<HTMLDivElement>(null);
   const setConnectionDragStart = useUiStore((state) => state.setConnectionDragStart);
   const connectionDragStart = useUiStore((state) => state.connectionDragStart);
@@ -62,6 +62,8 @@ export function TransputRowItem({ transputId, moduleId, transputType }: Props) {
       ref={transputRef}
       onMouseUp={onMouseUp}
       onMouseDown={onMouseDown}
-    />
+    >
+      TR
+    </div>
   );
 }

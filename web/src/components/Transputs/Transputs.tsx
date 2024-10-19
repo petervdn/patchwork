@@ -1,5 +1,5 @@
-import classes from './TransputRow.module.css';
-import { TransputRowItem } from './TransputRowItem.tsx';
+import classes from './Transputs.module.css';
+import { TransputsItem } from './TransputsItem.tsx';
 import { TransputType } from '../../types/Transput.ts';
 import { useModuleTransputs } from '../../stores/patch/hooks/useModuleTransputs.ts';
 import classNames from 'classnames';
@@ -9,7 +9,7 @@ type Props = {
   transputType: TransputType;
 };
 
-export function TransputRow({ transputType, moduleId }: Props) {
+export function Transputs({ transputType, moduleId }: Props) {
   const transputs = useModuleTransputs({ moduleId, transputType });
 
   if (!transputs) {
@@ -25,7 +25,7 @@ export function TransputRow({ transputType, moduleId }: Props) {
     >
       {transputs.map((transput) => {
         return (
-          <TransputRowItem
+          <TransputsItem
             key={transput.id}
             transputId={transput.id}
             moduleId={moduleId}

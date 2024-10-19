@@ -1,10 +1,11 @@
 import classes from './PatchModule.module.css';
-import { TransputRow } from '../TransputRow/TransputRow.tsx';
 import { useRef, useState } from 'react';
 import { useDrag } from '@use-gesture/react';
 import { Position } from '../../types/types.ts';
 import { updateModule } from '../../stores/patch/patchStore.ts';
 import { useModule } from '../../stores/patch/hooks/useModule.ts';
+import { Transputs } from '../Transputs/Transputs.tsx';
+import { PatchModuleHeader } from './PatchModuleHeader.tsx';
 
 type Props = {
   moduleId: string;
@@ -48,12 +49,18 @@ export function PatchModule({ moduleId }: Props) {
         top: module.position.y + dragOffset.y,
       }}
     >
-      <TransputRow moduleId={moduleId} transputType={'input'} />
-      <h2 ref={headerRef}>
-        {module.type} (id={module.id})
-      </h2>
-      <div className={classes.content}>[content]</div>
-      <TransputRow moduleId={moduleId} transputType={'output'} />
+      <div ref={headerRef} style={{ touchAction: 'none' }}>
+        <PatchModuleHeader module={module} />
+      </div>
+      <div className={classes.contentWrapper}>
+        <div className={classes.transputs}>
+          <Transputs moduleId={moduleId} transputType={'input'} />
+        </div>
+        <div className={classes.content}>[content]</div>
+        <div className={classes.transputs}>
+          <Transputs moduleId={moduleId} transputType={'output'} />
+        </div>
+      </div>
     </div>
   );
 }
