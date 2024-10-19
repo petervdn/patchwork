@@ -4,7 +4,6 @@ import { useConnections } from '../../stores/patch/hooks/useConnections.ts';
 import { drawConnection } from '../../utils/canvas/drawConnection.ts';
 import { transputElementRefs } from '../../stores/transputElementRefs.ts';
 import { useModules } from '../../stores/patch/hooks/useModules.ts';
-import { useRerender } from '../../utils/hooks/useRerender.ts';
 
 type Props = {
   size: Size;
@@ -16,7 +15,6 @@ export function PatchViewportBackground({ size }: Props) {
 
   const connections = useConnections();
   const modules = useModules();
-  const { rerender, rerenderFlag } = useRerender();
 
   useEffect(() => {
     if (!canvasRef.current) {
@@ -35,7 +33,7 @@ export function PatchViewportBackground({ size }: Props) {
 
     contextRef.current.fillStyle = '#E2DAD6';
     contextRef.current.fillRect(0, 0, size.width, size.height);
-  }, [size.height, size.width, rerenderFlag]);
+  }, [size.height, size.width, modules]);
 
   useEffect(() => {
     if (!contextRef.current) {
@@ -45,11 +43,7 @@ export function PatchViewportBackground({ size }: Props) {
     for (const connection of connections) {
       drawConnection({ transputElementRefs, context: contextRef.current, connection });
     }
-  }, [connections, rerenderFlag]);
-
-  useEffect(() => {
-    rerender();
-  }, [modules, rerender]);
+  }, [connections, modules]);
 
   return (
     <div>
