@@ -1,12 +1,6 @@
 import { create } from 'zustand';
-import omit from 'lodash/omit';
-import { Module, ModuleType } from '../../types/Module.ts';
-import { Position } from '../../types/types.ts';
-import { produce } from 'immer';
-import { createModule } from '../../utils/createModule.ts';
-
-import { Connection, TransputIdentifier } from '../../types/Connection.ts';
-import { createConnection } from '../../utils/createConnection.ts';
+import { Module } from '../../types/Module.ts';
+import { Connection } from '../../types/Connection.ts';
 
 type PatchStoreState = {
   modules: Array<Module>;
@@ -18,55 +12,3 @@ export const usePatchStore = create<PatchStoreState>(() => ({
   modules: [],
   connections: [],
 }));
-
-export function addModule({ type, position }: { type: ModuleType; position: Position }): void {
-  usePatchStore.setState((state) => {
-    return {
-      modules: [
-        ...state.modules,
-        createModule({
-          id: `module-${state.modules.length}`,
-          type,
-          position,
-        }),
-      ],
-    };
-  });
-}
-
-export function addConnection(transput1: TransputIdentifier, transput2: TransputIdentifier): void {
-  try {
-    const connection = createConnection(transput1, transput2);
-
-    usePatchStore.setState((state) => {
-      return {
-        connections: [...state.connections, connection],
-      };
-    });
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-export function updateModule(module: Pick<Module, 'id' | 'position'>): void {
-  usePatchStore.setState((state) => {
-    return produce(state, (draftState) => {
-      const moduleIndex = draftState.modules.findIndex((m) => m.id === module.id);
-      draftState.modules[moduleIndex].position = module.position;
-    });
-  });
-}
-
-export function toJson(): string {
-  const state = usePatchStore.getState();
-  const toJsonModules = state.modules.map((module) => {
-    return omit(module, 'transputs');
-  });
-
-  const toJsonState = {
-    modules: toJsonModules,
-    connections: state.connections,
-  };
-
-  return JSON.stringify(toJsonState, null, 2);
-}

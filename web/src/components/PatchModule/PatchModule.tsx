@@ -2,10 +2,10 @@ import classes from './PatchModule.module.css';
 import { useRef, useState } from 'react';
 import { useDrag } from '@use-gesture/react';
 import { Position } from '../../types/types.ts';
-import { updateModule } from '../../stores/patch/patchStore.ts';
 import { useModule } from '../../stores/patch/hooks/useModule.ts';
 import { Transputs } from '../Transputs/Transputs.tsx';
 import { PatchModuleHeader } from './PatchModuleHeader.tsx';
+import { updateModule } from '../../stores/patch/utils/updateModule.ts';
 
 type Props = {
   moduleId: string;

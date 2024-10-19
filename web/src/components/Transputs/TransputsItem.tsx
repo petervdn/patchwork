@@ -2,8 +2,8 @@ import classes from './TransputsItem.module.css';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { TransputType } from '../../types/Transput.ts';
 import { useUiStore } from '../../utils/uiStore.ts';
-import { addConnection } from '../../stores/patch/patchStore.ts';
 import { useRegisterTransputElementRef } from '../../utils/hooks/useRegisterTransputElementRef.ts';
+import { addConnection } from '../../stores/patch/utils/addConnection.ts';
 
 type Props = {
   transputId: string;

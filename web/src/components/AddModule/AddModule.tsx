@@ -1,7 +1,9 @@
 import classes from './AddModule.module.css';
 import { useRef } from 'react';
 import { ModuleType, moduleTypes } from '../../types/Module.ts';
-import { addModule, toJson } from '../../stores/patch/patchStore.ts';
+import { downloadAsJson } from '../../utils/downloadAsJson.ts';
+import { patchToJson } from '../../stores/patch/utils/patchToJson.ts';
+import { addModule } from '../../stores/patch/utils/addModule.ts';
 
 export function AddModule() {
   const selectRef = useRef<HTMLSelectElement>(null);
@@ -14,8 +16,7 @@ export function AddModule() {
   };
 
   const onToJsonClick = () => {
-    const json = toJson();
-    console.log(json);
+    downloadAsJson(patchToJson());
   };
 
   return (
