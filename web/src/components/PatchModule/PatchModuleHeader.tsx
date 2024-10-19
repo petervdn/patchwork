@@ -6,11 +6,5 @@ type Props = {
 };
 
 export function PatchModuleHeader({ module }: Props) {
-  return (
-    <div className={classes.header}>
-      <h2>
-        {module.type} (id={module.id})
-      </h2>
-    </div>
-  );
+  return <h2 className={classes.header}>{module.type}</h2>;
 }

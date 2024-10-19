@@ -18,6 +18,9 @@ todo:
 - remove styled components
 - rewrite dial to use canvas
 - fix sizing of dial
+- design transputs
+- use transput labels
+- delete a module
  */
 
 function App() {
