@@ -13,9 +13,11 @@ todo:
 - draw grid in background
 - add knobs from trigger riot
 - don't allow dragging module outside viewport
-- use svg for connections
 - connections should update on drag
 - refactor current drag approach with own approach (+update module every drag)
+- remove styled components
+- rewrite dial to use canvas
+- fix sizing of dial
  */
 
 function App() {

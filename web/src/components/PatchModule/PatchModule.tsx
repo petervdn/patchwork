@@ -6,6 +6,7 @@ import { useModule } from '../../stores/patch/hooks/useModule.ts';
 import { Transputs } from '../Transputs/Transputs.tsx';
 import { PatchModuleHeader } from './PatchModuleHeader.tsx';
 import { updateModule } from '../../stores/patch/utils/updateModule.ts';
+import { Dial } from '../dial/Dial.tsx';
 
 type Props = {
   moduleId: string;
@@ -57,7 +58,9 @@ export function PatchModule({ moduleId }: Props) {
         <div className={classes.transputs}>
           <Transputs moduleId={moduleId} transputType={'input'} />
         </div>
-        <div className={classes.content}>[content]</div>
+        <div className={classes.content}>
+          <Dial min={0} max={100} value={50} size={120} buttonSize={80} />
+        </div>
         <div className={classes.transputs}>
           <Transputs moduleId={moduleId} transputType={'output'} />
         </div>
