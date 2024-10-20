@@ -1,7 +1,7 @@
 import classes from './TransputsItem.module.css';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { TransputType } from '../../types/Transput.ts';
-import { useUiStore } from '../../utils/uiStore.ts';
+import { setConnectionDragMousePosition, useUiStore } from '../../utils/uiStore.ts';
 import { useRegisterTransputElementRef } from '../../utils/hooks/useRegisterTransputElementRef.ts';
 import { addConnection } from '../../stores/patch/utils/addConnection.ts';
 
@@ -17,8 +17,6 @@ export function TransputsItem({ transputId, moduleId, transputType }: Props) {
   const connectionDragStart = useUiStore((state) => state.connectionDragStart);
   const [mouseDown, setMouseDown] = React.useState(false);
 
-  // const transput = useModuleTransput({ transputId, moduleId, transputType });
-
   const transputIdentifier = useMemo(
     () => ({ moduleId, transputId, transputType }),
     [moduleId, transputId, transputType],
@@ -32,10 +30,32 @@ export function TransputsItem({ transputId, moduleId, transputType }: Props) {
       setConnectionDragStart(undefined);
     }
 
+    function onMouseMove(event: MouseEvent) {
+      if (!transputRef.current) {
+        return;
+      }
+
+      // todo refactor this
+      const element =
+        transputRef.current.parentElement?.parentElement?.parentElement?.parentElement
+          ?.parentElement;
+      if (!element) {
+        return;
+      }
+      const containerElement = element.getBoundingClientRect();
+
+      setConnectionDragMousePosition({
+        x: event.x - containerElement.left,
+        y: event.y - containerElement.top,
+      });
+    }
+
     if (mouseDown) {
+      window.addEventListener('mousemove', onMouseMove);
       window.addEventListener('mouseup', onMouseUp);
 
       return () => {
+        window.removeEventListener('mousemove', onMouseMove);
         window.removeEventListener('mouseup', onMouseUp);
       };
     }

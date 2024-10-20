@@ -1,8 +1,26 @@
-import { Connection } from '../types/Connection.ts';
+import { Connection, TransputIdentifier } from '../types/Connection.ts';
 import { Position } from '../types/types.ts';
 import { transputElementRefs } from '../stores/transputElementRefs.ts';
 import { getStringifiedTransputId } from './getStringifiedTransputId.ts';
 import { getElementOffsetRelativeToParent } from './getElementOffsetRelativeToParent.ts';
+
+// todo why do we have both a transput and a transput identifier? (plus we should store id on the item)
+export function getPositionForTransput(transput: TransputIdentifier): Position | null {
+  const elementRef = transputElementRefs[getStringifiedTransputId(transput)];
+  if (!elementRef.current) {
+    return null;
+  }
+
+  const rect = elementRef.current.getBoundingClientRect();
+  // todo better approach for the magic number
+  const parentsToCanvas = 5;
+  const offset = getElementOffsetRelativeToParent(elementRef.current, parentsToCanvas);
+
+  return {
+    x: offset.left + (transput.transputType === 'output' ? rect.width / 2 : 0),
+    y: offset.top + rect.height / 2,
+  };
+}
 
 export function getConnectionFromToPositions(
   connection: Connection,

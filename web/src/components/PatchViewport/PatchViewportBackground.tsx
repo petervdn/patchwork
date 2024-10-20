@@ -3,6 +3,8 @@ import { Size } from '../../types/types.ts';
 import { useConnections } from '../../stores/patch/hooks/useConnections.ts';
 import { useModules } from '../../stores/patch/hooks/useModules.ts';
 import { SvgConnection } from './SvgConnection.tsx';
+import { useUiStore } from '../../utils/uiStore.ts';
+import { SvgDragConnection } from './SvgDragConnection.tsx';
 
 type Props = {
   size: Size;
@@ -11,6 +13,7 @@ type Props = {
 export function PatchViewportBackground({ size }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const contextRef = useRef<CanvasRenderingContext2D | undefined | null>(undefined);
+  const { connectionDragMousePosition, connectionDragStart } = useUiStore();
 
   const connections = useConnections();
   const modules = useModules();
@@ -35,6 +38,7 @@ export function PatchViewportBackground({ size }: Props) {
   }, [size.height, size.width, modules]);
 
   // todo: fix numbers for arrowhead, no idea what i'm doing
+  //  (also in SvgConnection.tsx for shortening last part of line)
   const arrowWidth = 5;
   const arrowLength = 4;
   const arrowString = `M 0,0 V${arrowWidth} L ${arrowLength},${arrowWidth * 0.5} Z`;
@@ -57,6 +61,13 @@ export function PatchViewportBackground({ size }: Props) {
       {connections.map((connection, index) => (
         <SvgConnection connection={connection} key={index} />
       ))}
+
+      {connectionDragStart && connectionDragMousePosition && (
+        <SvgDragConnection
+          transput={connectionDragStart}
+          mousePosition={connectionDragMousePosition}
+        />
+      )}
     </svg>
   );
 }
