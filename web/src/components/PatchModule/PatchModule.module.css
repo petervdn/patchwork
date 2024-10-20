@@ -1,6 +1,6 @@
 .wrapper {
     position: absolute;
-    #user-select: none;
+    user-select: none;
     background-color: white;
     border-radius: 5px;
     overflow: hidden;

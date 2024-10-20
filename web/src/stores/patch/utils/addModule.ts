@@ -2,6 +2,7 @@ import { ModuleType } from '../../../types/Module.ts';
 import { Position } from '../../../types/types.ts';
 import { createModule } from '../../../utils/createModule.ts';
 import { usePatchStore } from '../patchStore.ts';
+import { createModuleId } from '../../../utils/createModuleId.ts';
 
 export function addModule({ type, position }: { type: ModuleType; position: Position }): void {
   usePatchStore.setState((state) => {
@@ -9,7 +10,7 @@ export function addModule({ type, position }: { type: ModuleType; position: Posi
       modules: [
         ...state.modules,
         createModule({
-          id: `module-${state.modules.length}`,
+          id: createModuleId(),
           type,
           position,
         }),
