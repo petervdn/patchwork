@@ -44,5 +44,5 @@ function getConnectionFromTo(connection: Connection, inset = 4): { from: Positio
 export function SvgConnection({ connection }: Props): ReactElement {
   const { from, to } = getConnectionFromTo(connection);
 
-  return <path d={`M ${from.x} ${from.y} L ${to.x} ${to.y}`} stroke={'white'} strokeWidth="2" />;
+  return <path d={`M ${from.x} ${from.y} L ${to.x} ${to.y}`} stroke={'white'} strokeWidth="3" />;
 }

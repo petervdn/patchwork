@@ -17,6 +17,9 @@ export function Controls() {
   };
 
   const onToJsonClick = () => {
+    console.log(patchToJson());
+  };
+  const onToFileClick = () => {
     downloadAsJson('patch.pw', patchToJson());
   };
 
@@ -31,6 +34,8 @@ export function Controls() {
         ))}
       </select>
       <button onClick={onToJsonClick}>to JSON</button>
+      <button onClick={onToFileClick}>to file</button>
+
       <LoadPatch />
     </div>
   );

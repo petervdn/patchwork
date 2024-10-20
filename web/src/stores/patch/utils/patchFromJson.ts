@@ -5,6 +5,7 @@ import { moduleTypes } from '../../../types/Module.ts';
 
 const ModuleTypeSchema = z.enum(moduleTypes);
 
+// todo: also use for generating output
 const schema = z.object({
   modules: z.array(
     z.object({
