@@ -1,12 +1,14 @@
 import { Position } from '../../types/types.ts';
 import { createConnectionLinePoints } from '../../utils/createConnectionLinePoints.ts';
+import { SVGProps } from 'react';
 
 type Props = {
   from: Position;
   to: Position;
+  strokeDasharray?: SVGProps<SVGLineElement>['strokeDasharray'];
 };
 
-export function SvgConnectionLine({ from, to }: Props) {
+export function SvgConnectionLine({ from, to, strokeDasharray }: Props) {
   const points = createConnectionLinePoints({ from, to });
   const pathString = points.reduce((acc, point, index) => {
     const prefix = index === 0 ? 'M' : 'L';
@@ -21,6 +23,7 @@ export function SvgConnectionLine({ from, to }: Props) {
       fill="none"
       strokeLinejoin={'round'}
       markerEnd="url(#head)"
+      strokeDasharray={strokeDasharray}
     />
   );
 }

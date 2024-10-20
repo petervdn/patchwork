@@ -16,5 +16,5 @@ export function SvgDragConnection({ mousePosition, transput }: Props): ReactElem
     return null;
   }
 
-  return <SvgConnectionLine from={from} to={mousePosition} />;
+  return <SvgConnectionLine from={from} to={mousePosition} strokeDasharray="5,5" />;
 }
