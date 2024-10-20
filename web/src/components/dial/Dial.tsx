@@ -45,7 +45,6 @@ export function Dial({
   const startDragDataRef = useRef<{ value: number; y: number }>();
 
   const bind = useDrag((state) => {
-    console.log('drag');
     if (state.first) {
       startDragDataRef.current = { value, y: state.xy[1] };
     }
