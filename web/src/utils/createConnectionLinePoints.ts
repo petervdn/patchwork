@@ -14,7 +14,7 @@ export function createConnectionLinePoints({
     const halfwayX = from.x + (to.x - from.x) / 2;
     points.push({ x: halfwayX, y: from.y });
     points.push({ x: halfwayX, y: to.y });
-    points.push({ x: to.x, y: to.y });
+    points.push({ x: to.x - 14, y: to.y });
 
     return points;
   }

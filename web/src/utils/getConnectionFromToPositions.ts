@@ -6,7 +6,7 @@ import { getElementOffsetRelativeToParent } from './getElementOffsetRelativeToPa
 
 export function getConnectionFromToPositions(
   connection: Connection,
-  inset = 4,
+  inset = 0,
 ): { from: Position; to: Position } {
   const fromElementRef = transputElementRefs[getStringifiedTransputId(connection.from)];
   const toElementRef = transputElementRefs[getStringifiedTransputId(connection.to)];

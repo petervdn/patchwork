@@ -34,8 +34,26 @@ export function PatchViewportBackground({ size }: Props) {
     contextRef.current.fillRect(0, 0, size.width, size.height);
   }, [size.height, size.width, modules]);
 
+  // todo: fix numbers for arrowhead, no idea what i'm doing
+  const arrowWidth = 5;
+  const arrowLength = 4;
+  const arrowString = `M 0,0 V${arrowWidth} L ${arrowLength},${arrowWidth * 0.5} Z`;
+
   return (
     <svg width={size.width} height={size.height}>
+      <defs>
+        <marker
+          id="head"
+          orient="auto"
+          markerWidth="10"
+          markerHeight="10"
+          refX="0"
+          refY={arrowWidth * 0.5}
+        >
+          <path d={arrowString} fill="white" />
+        </marker>
+      </defs>
+
       {connections.map((connection, index) => (
         <SvgConnection connection={connection} key={index} />
       ))}

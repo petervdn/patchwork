@@ -16,6 +16,13 @@ export function SvgConnection({ connection }: Props): ReactElement {
   }, '');
 
   return (
-    <path d={pathString} stroke={'white'} strokeWidth="3" fill="none" strokeLinejoin={'round'} />
+    <path
+      d={pathString}
+      stroke={'white'}
+      strokeWidth="3"
+      fill="none"
+      strokeLinejoin={'round'}
+      markerEnd="url(#head)"
+    />
   );
 }
