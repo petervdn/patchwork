@@ -20,9 +20,11 @@ todo:
 - fix sizing of dial
 - design transputs
 - use transput labels
-- delete a module
 - have a versioned module definitions?
-- subpatch modyle
+- subpatch module
+- allow flipping transputs horizontally?
+- connection as arrow?
+
  */
 
 function App() {
