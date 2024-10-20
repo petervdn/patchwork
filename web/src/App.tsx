@@ -10,6 +10,8 @@ todo:
 - dragging a module should bring it to the front
 - allow dragging of viewport
 - allow zooming of viewport?
+- draw line while dragging connection
+- change connection line algorithm
 - draw grid in background
 - add knobs from trigger riot
 - don't allow dragging module outside viewport

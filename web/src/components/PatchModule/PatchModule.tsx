@@ -1,7 +1,6 @@
 import classes from './PatchModule.module.css';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useDrag } from '@use-gesture/react';
-import { Position } from '../../types/types.ts';
 import { useModule } from '../../stores/patch/hooks/useModule.ts';
 import { Transputs } from '../Transputs/Transputs.tsx';
 import { PatchModuleHeader } from './PatchModuleHeader.tsx';
@@ -13,7 +12,6 @@ type Props = {
 };
 
 export function PatchModule({ moduleId }: Props) {
-  const [dragOffset, setDragOffset] = useState<Position>({ x: 0, y: 0 });
   const module = useModule(moduleId);
 
   const headerRef = useRef<HTMLDivElement>(null);
@@ -23,17 +21,13 @@ export function PatchModule({ moduleId }: Props) {
         return;
       }
 
-      setDragOffset({ x: state.movement[0], y: state.movement[1] });
-      if (state.last) {
-        updateModule({
-          id: module.id,
-          position: {
-            x: module.position.x + dragOffset.x,
-            y: module.position.y + dragOffset.y,
-          },
-        });
-        setDragOffset({ x: 0, y: 0 });
-      }
+      updateModule({
+        id: module.id,
+        position: {
+          x: module.position.x + state.delta[0],
+          y: module.position.y + state.delta[1],
+        },
+      });
     },
     { target: headerRef },
   );
@@ -46,8 +40,8 @@ export function PatchModule({ moduleId }: Props) {
     <div
       className={classes.wrapper}
       style={{
-        left: module.position.x + dragOffset.x,
-        top: module.position.y + dragOffset.y,
+        left: module.position.x,
+        top: module.position.y,
       }}
     >
       {/* todo: pass ref to component? */}
