@@ -13,7 +13,7 @@ export function getPositionForTransput(transput: TransputIdentifier): Position |
 
   const rect = elementRef.current.getBoundingClientRect();
   // todo better approach for the magic number
-  const parentsToCanvas = 5;
+  const parentsToCanvas = 4;
   const offset = getElementOffsetRelativeToParent(elementRef.current, parentsToCanvas);
 
   return {

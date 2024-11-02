@@ -1,6 +1,7 @@
 import { Position } from '../../types/types.ts';
 import { createConnectionLinePoints } from '../../utils/createConnectionLinePoints.ts';
 import { SVGProps } from 'react';
+import classes from './SvgConnectionLine.module.css';
 
 type Props = {
   from: Position;
@@ -24,6 +25,7 @@ export function SvgConnectionLine({ from, to, strokeDasharray }: Props) {
       strokeLinejoin={'round'}
       markerEnd="url(#head)"
       strokeDasharray={strokeDasharray}
+      className={strokeDasharray ? classes.animate : undefined}
     />
   );
 }

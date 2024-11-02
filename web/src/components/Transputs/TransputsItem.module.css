@@ -1,8 +1,9 @@
 
  .transput {
-     background-color: black;
+     background-color: #DDD;
      color: white;
      margin-bottom: 10px;
+     width: 100%;
 }
 
  .transput:hover {

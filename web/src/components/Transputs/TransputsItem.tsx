@@ -17,6 +17,7 @@ export function TransputsItem({ transputId, moduleId, transputType }: Props) {
   const connectionDragStart = useUiStore((state) => state.connectionDragStart);
   const [mouseDown, setMouseDown] = React.useState(false);
 
+  // todo: shouldnt this identifier get passed to this component
   const transputIdentifier = useMemo(
     () => ({ moduleId, transputId, transputType }),
     [moduleId, transputId, transputType],
@@ -28,6 +29,7 @@ export function TransputsItem({ transputId, moduleId, transputType }: Props) {
     function onMouseUp() {
       setMouseDown(false);
       setConnectionDragStart(undefined);
+      setConnectionDragMousePosition(undefined);
     }
 
     function onMouseMove(event: MouseEvent) {
@@ -35,10 +37,9 @@ export function TransputsItem({ transputId, moduleId, transputType }: Props) {
         return;
       }
 
-      // todo refactor this
+      // todo refactor this (same as parentsToCanvas in getPositionForTransput)
       const element =
-        transputRef.current.parentElement?.parentElement?.parentElement?.parentElement
-          ?.parentElement;
+        transputRef.current.parentElement?.parentElement?.parentElement?.parentElement;
       if (!element) {
         return;
       }
@@ -75,9 +76,6 @@ export function TransputsItem({ transputId, moduleId, transputType }: Props) {
 
   return (
     <div
-      style={{
-        backgroundColor: mouseDown ? 'red' : undefined,
-      }}
       className={classes.transput}
       ref={transputRef}
       onMouseUp={onMouseUp}

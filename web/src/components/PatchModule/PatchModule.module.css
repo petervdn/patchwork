@@ -10,7 +10,8 @@
         margin: 20px 0;
 
         & .transputs {
-            width: 50px;
+            width: 35px;
+            text-align: center;
         }
 
         & .content {

@@ -5,14 +5,16 @@ import { downloadAsJson } from '../../utils/downloadAsJson.ts';
 import { patchToJson } from '../../stores/patch/utils/patchToJson.ts';
 import { addModule } from '../../stores/patch/utils/addModule.ts';
 import { LoadPatch } from './LoadPatch.tsx';
+import { useModules } from '../../stores/patch/hooks/useModules.ts';
 
 export function Controls() {
   const selectRef = useRef<HTMLSelectElement>(null);
+  const modules = useModules();
 
   const onAddModuleClick = () => {
     addModule({
       type: selectRef.current?.value as ModuleType,
-      position: { x: 500 * Math.random(), y: 500 * Math.random() },
+      position: { x: 100 + modules.length * 300, y: 200 },
     });
   };
 
