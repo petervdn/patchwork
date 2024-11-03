@@ -19,20 +19,16 @@ export function getConnectedModulesToModule({
   }
 
   const moduleTransputs = getModuleTransputs(module.type);
-  if (connectedTo === 'input') {
-    const connections = moduleTransputs.in.flatMap((transput) =>
+
+  const connections = (connectedTo === 'input' ? moduleTransputs.in : moduleTransputs.out).flatMap(
+    (transput) =>
       getConnectionsForTransput(
-        { transputId: transput.id, transputType: 'input', moduleId },
+        { transputId: transput.id, transputType: connectedTo, moduleId },
         patch,
       ),
-    );
-
-    return connections.map((connection) => connection.from.moduleId);
-  }
-
-  const connections = moduleTransputs.out.flatMap((output) =>
-    getConnectionsForTransput({ transputId: output.id, transputType: 'output', moduleId }, patch),
   );
 
-  return connections.map((connection) => connection.to.moduleId);
+  return connections.map(
+    (connection) => (connectedTo === 'input' ? connection.from : connection.to).moduleId,
+  );
 }
