@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "typecheck": "tsc --project tsconfig.json --noUnusedLocals"
+    "typecheck": "tsc --project tsconfig.app.json"
   },
   "prettier": "@mediamonks/prettier-config",
   "dependencies": {

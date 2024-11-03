@@ -19,6 +19,11 @@ export function getModuleTransputs(moduleType: ModuleType): Module['transputs'] 
           inputs: [],
           outputs: ['output'],
         };
+      case 'output':
+        return {
+          inputs: ['input'],
+          outputs: [],
+        };
     }
   });
 

@@ -1,5 +1,4 @@
 import classes from './Controls.module.css';
-import { useRef } from 'react';
 import { ModuleType, moduleTypes } from '../../types/Module.ts';
 import { downloadAsJson } from '../../utils/downloadAsJson.ts';
 import { patchToJson } from '../../stores/patch/utils/patchToJson.ts';
@@ -8,12 +7,11 @@ import { LoadPatch } from './LoadPatch.tsx';
 import { useModules } from '../../stores/patch/hooks/useModules.ts';
 
 export function Controls() {
-  const selectRef = useRef<HTMLSelectElement>(null);
   const modules = useModules();
 
-  const onAddModuleClick = () => {
+  const onAddModuleClick = (type: ModuleType) => {
     addModule({
-      type: selectRef.current?.value as ModuleType,
+      type,
       position: { x: 100 + modules.length * 300, y: 200 },
     });
   };
@@ -27,16 +25,19 @@ export function Controls() {
 
   return (
     <div className={classes.wrapper}>
-      <button onClick={onAddModuleClick}>Add module</button>
-      <select ref={selectRef}>
+      <div>
+        <h3>Add module</h3>
         {moduleTypes.map((type) => (
-          <option key={type} value={type}>
+          <button onClick={() => onAddModuleClick(type)} key={type}>
             {type}
-          </option>
+          </button>
         ))}
-      </select>
-      <button onClick={onToJsonClick}>to JSON</button>
-      <button onClick={onToFileClick}>to file</button>
+      </div>
+      <div>
+        <h3>Load/save</h3>
+        <button onClick={onToJsonClick}>to JSON</button>
+        <button onClick={onToFileClick}>to file</button>
+      </div>
 
       <LoadPatch />
     </div>

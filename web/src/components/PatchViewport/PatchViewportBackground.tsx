@@ -44,7 +44,7 @@ export function PatchViewportBackground({ size }: Props) {
   const arrowString = `M 0,0 V${arrowWidth} L ${arrowLength},${arrowWidth * 0.5} Z`;
 
   return (
-    <svg width={size.width} height={size.height}>
+    <svg width="100%" height="100%">
       <defs>
         <marker
           id="head"

@@ -1,7 +1,7 @@
 import { Entity, Position } from './types.ts';
 import { Input, Output } from './Transput.ts';
 
-export const moduleTypes = ['oscillator', 'gain', 'lfo'] as const;
+export const moduleTypes = ['oscillator', 'gain', 'lfo', 'output'] as const;
 export type ModuleType = (typeof moduleTypes)[number];
 
 export type Module = Entity & {

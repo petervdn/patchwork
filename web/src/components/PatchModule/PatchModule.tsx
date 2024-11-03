@@ -6,6 +6,7 @@ import { Transputs } from '../Transputs/Transputs.tsx';
 import { PatchModuleHeader } from './PatchModuleHeader.tsx';
 import { updateModule } from '../../stores/patch/utils/updateModule.ts';
 import { PatchModuleContent } from '../PatchModuleContent.tsx';
+import { setSelection } from '../../stores/selection/selectionStore.ts';
 
 type Props = {
   moduleId: string;
@@ -32,6 +33,10 @@ export function PatchModule({ moduleId }: Props) {
     { target: headerRef },
   );
 
+  const onMouseDown = () => {
+    setSelection({ type: 'module', id: moduleId });
+  };
+
   if (!module) {
     return null;
   }
@@ -43,6 +48,7 @@ export function PatchModule({ moduleId }: Props) {
         left: module.position.x,
         top: module.position.y,
       }}
+      onMouseDown={onMouseDown}
     >
       {/* todo: pass ref to component? */}
       <div ref={headerRef} style={{ touchAction: 'none' }}>

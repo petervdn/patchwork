@@ -1,6 +1,6 @@
-import './App.css';
 import { PatchViewport } from './components/PatchViewport/PatchViewport.tsx';
 import { Controls } from './components/Controls/Controls.tsx';
+import { Selection } from './components/Selection/Selection.tsx';
 
 /*
 todo:
@@ -21,9 +21,10 @@ todo:
 - use transput labels
 - have a versioned module definitions?
 - sub patch module
-- allow flipping transputs horizontally?
+- allow flipping transputs horizontally? (or rotate?)
 - connection as arrow?
 - snap dragging line when hovering over valid input
+- calculate module order
  */
 
 function App() {
@@ -31,7 +32,10 @@ function App() {
     <div style={{ margin: 20 }}>
       <h1>Patchwork</h1>
       <PatchViewport />
-      <Controls />
+      <div style={{ display: 'flex' }}>
+        <Controls />
+        <Selection />
+      </div>
     </div>
   );
 }
